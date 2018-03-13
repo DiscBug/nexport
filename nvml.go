@@ -108,6 +108,7 @@ func (s *Device) GetUtilization() (gpu, memory int, err error) {
 	}
 	gpu = int(utilRates.gpu)
 	memory = int(utilRates.memory)
+	log.Printf("GetUtilization successful")
 	return
 }
 
