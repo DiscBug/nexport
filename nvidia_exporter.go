@@ -29,10 +29,10 @@ var (
 			help:   "Power Usage of an NVIDIA GPU in Watts",
 			labels: []string{"device_id", "device_uuid", "device_name"},
 		},
-		"fan_speed": &VecInfo{
-                        help:   "Device Fan Speed in Percent of Maximum",
-                        labels: []string{"device_id", "device_uuid", "device_name"},
-                },
+		//"fan_speed": &VecInfo{
+                //        help:   "Device Fan Speed in Percent of Maximum",
+                //        labels: []string{"device_id", "device_uuid", "device_name"},
+                //},
 		"gpu_percent": &VecInfo{
 			help:   "Percent of GPU Utilized",
 			labels: []string{"device_id", "device_uuid", "device_name"},
@@ -117,7 +117,7 @@ func (e *Exporter) GetTelemetryFromNVML() {
 	var (
 		gpuMem                    *NVMLMemory
 		powerUsage                int
-		fanSpeed		  int
+		//fanSpeed		  int
 		gpuPercent, memoryPercent int
 		err                       error
 		tempF, tempC              int
@@ -142,10 +142,10 @@ func (e *Exporter) GetTelemetryFromNVML() {
 		}
 		e.gauges["power_watts"].WithLabelValues(id, device.DeviceUUID, device.DeviceName).Set(float64(powerUsage))
 
-		if fanSpeed, err = device.GetFanSpeed(); err != nil {
-                        goto ErrorFetching
-                }
-		e.gauges["fan_speed"].WithLabelValues(id, device.DeviceUUID, device.DeviceName).Set(float64(fanSpeed))
+		//if fanSpeed, err = device.GetFanSpeed(); err != nil {
+                //        goto ErrorFetching
+                //}
+		//e.gauges["fan_speed"].WithLabelValues(id, device.DeviceUUID, device.DeviceName).Set(float64(fanSpeed))
 
 		if gpuMem, err = device.GetMemoryInfo(); err != nil {
 			goto ErrorFetching
