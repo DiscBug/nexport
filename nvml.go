@@ -8,6 +8,7 @@ package main
 */
 import "C"
 import (
+	"log"
 	"errors"
 	"fmt"
 	"unsafe"
@@ -105,8 +106,10 @@ func (s *Device) GetUtilization() (gpu, memory int, err error) {
 		err = getGoError(result)
 		return
 	}
+	log.Printf("GetUtilization ok")
 	gpu = int(utilRates.gpu)
 	memory = int(utilRates.memory)
+	log.Printf("GetUtilization ok ok")
 	return
 }
 
@@ -116,7 +119,8 @@ func (s *Device) GetPowerUsage() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	// nvmlDeviceGetPowerUsage returns milliwatts.. convert to watt
+	// nvmlDeviceGetPowerUsage returns milliwatts.. convert to watts
+	log.Printf("GetPowerUsage ok")
 	return usage / 1000, nil
 }
 
@@ -126,6 +130,7 @@ func (s *Device) GetFanSpeed() (int, error) {
         if err != nil {
                 return 0, err
         }
+	log.Printf("GetFanSpeed ok")
         return speed, nil
 }
 
@@ -135,6 +140,7 @@ func (s *Device) GetTemperature() (int, int, error) {
 	if result := C.nvmlDeviceGetTemperature(s.d, C.NVML_TEMPERATURE_GPU, &tempc); result != C.NVML_SUCCESS {
 		return -1, -1, getGoError(result)
 	}
+	log.Printf("GetTemperature ok")
 
 	return int(tempc), int(tempc*9/5 + 32), nil
 }
@@ -146,6 +152,7 @@ func (s *Device) GetMemoryInfo() (memInfo *NVMLMemory, err error) {
 	if result := C.nvmlDeviceGetMemoryInfo(s.d, &res); result != C.NVML_SUCCESS {
 		return nil, getGoError(result)
 	}
+	log.Printf("GetMemoryInfo ok")
 
 	return &NVMLMemory{
 		Free:  int64(res.free),
