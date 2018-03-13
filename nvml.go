@@ -125,14 +125,14 @@ func (s *Device) GetPowerUsage() (int, error) {
 }
 
 // GetFanSpeed returns the fan speed in percent
-func (s *Device) GetFanSpeed() (int, error) {
-        speed, err := s.callGetIntFunc(C.getNvmlIntProperty(C.nvmlDeviceGetFanSpeed))
-        if err != nil {
-                return 0, err
-        }
-	log.Printf("GetFanSpeed ok")
-        return speed, nil
-}
+//func (s *Device) GetFanSpeed() (int, error) {
+//        speed, err := s.callGetIntFunc(C.getNvmlIntProperty(C.nvmlDeviceGetFanSpeed))
+//        if err != nil {
+//                return 0, err
+//        }
+//	log.Printf("GetFanSpeed ok")
+//        return speed, nil
+//}
 
 // GetTemperature returns the Device's temperature in Farenheit and celsius
 func (s *Device) GetTemperature() (int, int, error) {
