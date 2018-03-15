@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* CUDA 8.X - Modifications may need to be made in nvml.go to point to your install
+* CUDA 9.0 - Modifications may need to be made in nvml.go to point to your install
 
 ## Building
 
